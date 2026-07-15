@@ -43,7 +43,10 @@ nav,header,section,footer,.marquee,#mobileMenu,#loader{position:relative;z-index
 
 /* ---------- nav ---------- */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background 0.4s ease,border-color 0.4s ease;border-bottom:1px solid transparent;}
-nav.scrolled{background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border-color:var(--line);}
+nav.scrolled{background:rgba(255,255,255,0.85);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:var(--line);}
+#mobileCta{position:fixed;left:0;right:0;bottom:0;z-index:90;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,0.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform 0.5s var(--ease);display:none;}
+#mobileCta.show{transform:translateY(0);}
+#mobileCta .btn{display:block;text-align:center;width:100%;}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,5vw,64px);}
 .logo{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.24em;white-space:nowrap;}
 .logo b{color:var(--blue);font-weight:400;}
@@ -198,12 +201,22 @@ footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,2
   #burger{display:block;}
   .cap-grid,.ind-grid,.steps{grid-template-columns:1fr 1fr;}
   .grid-2,.calc-grid{grid-template-columns:1fr;}
+  #mobileCta{display:block;}
+  body{padding-bottom:56px;}
 }
 @media(max-width:600px){
   .cap-grid,.ind-grid,.steps{grid-template-columns:1fr;}
   .ind{height:220px;}
   .hero-ctas .btn{width:100%;text-align:center;}
   .hero-ctas{gap:12px;}
+  h1{font-size:clamp(38px,11.5vw,48px);letter-spacing:-0.02em;}
+  .hero-sub{font-size:15px;margin:26px 0 32px;}
+  h2{font-size:clamp(30px,8.6vw,38px);}
+  .sec-head{flex-direction:column;gap:14px;}
+  .cap:active{transform:scale(0.98);border-color:var(--blue-soft);}
+  .ind:active img{transform:scale(1.05);filter:grayscale(10%) brightness(0.6);}
+  .step:active .big{color:var(--blue);}
+  .break p{font-size:clamp(22px,6.4vw,28px);}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
@@ -403,6 +416,8 @@ footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,2
   </div>
 </footer>
 
+<div id="mobileCta"><a class="btn btn-black" href="https://calendly.com/alessandrokeleti/ai-strategy-session" target="_blank" rel="noopener">Book a free consultation</a></div>
+
 <script>
 (function(){
   'use strict';
@@ -419,10 +434,12 @@ footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,2
     document.body.classList.add('loaded');
   }, 2600);
 
-  /* nav */
+  /* nav + sticky mobile CTA */
   var nav = document.getElementById('nav');
+  var mCta = document.getElementById('mobileCta');
   window.addEventListener('scroll', function(){
     nav.classList.toggle('scrolled', window.scrollY > 40);
+    if(mCta) mCta.classList.toggle('show', window.scrollY > 600);
   }, {passive:true});
 
   /* mobile menu */
@@ -456,12 +473,18 @@ footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,2
   var ctx = canvas.getContext('2d');
   var pts = [], W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = false, LINK = 19600, PAD = 26, DOT = 0.42, LINE_A = 0.09;
 
   function sizeCanvas(){
     W = window.innerWidth; H = window.innerHeight;
     canvas.width = W * DPR; canvas.height = H * DPR;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    var count = Math.min(Math.floor(W * H / 11000), 170);
+    isMobile = W < 700;
+    LINK = isMobile ? 24025 : 19600;
+    PAD = isMobile ? 12 : 26;
+    DOT = isMobile ? 0.5 : 0.42;
+    LINE_A = isMobile ? 0.14 : 0.09;
+    var count = Math.min(Math.floor(W * H / (isMobile ? 6200 : 11000)), 170);
     pts = [];
     for(var i = 0; i < count; i++){
       pts.push({
@@ -469,7 +492,7 @@ footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,2
         y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.18,
         vy: (Math.random() - 0.5) * 0.18,
-        r: Math.random() * 1.4 + 0.5
+        r: Math.random() * 1.4 + (isMobile ? 0.8 : 0.5)
       });
     }
   }
@@ -480,9 +503,15 @@ footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,2
   window.addEventListener('mousemove', function(e){
     mouse.x = e.clientX; mouse.y = e.clientY;
   }, {passive:true});
+  function setTouch(e){
+    if(e.touches && e.touches.length){ mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; }
+  }
+  window.addEventListener('touchstart', setTouch, {passive:true});
+  window.addEventListener('touchmove', setTouch, {passive:true});
+  window.addEventListener('touchend', function(){ mouse.x = -9999; mouse.y = -9999; }, {passive:true});
 
   /* content exclusion zones — geometry lives only in the empty space between items */
-  var PAD = 26, zoneEls = [], zones = [];
+  var zoneEls = [], zones = [];
   function collectZones(){
     zoneEls = Array.prototype.slice.call(document.querySelectorAll(
       '.nav-inner, .hero-content, .scroll-cue, .sec-head, .cap, .ind, .panel, .step, .pillar, .after-steps, .grid-2, #contact .reveal, .break, .marquee, .foot'
@@ -522,17 +551,17 @@ footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,2
       var p = pts[i];
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, 6.2832);
-      ctx.fillStyle = 'rgba(10,10,10,0.42)';
+      ctx.fillStyle = 'rgba(10,10,10,' + DOT + ')';
       ctx.fill();
       for(var j = i + 1; j < pts.length; j++){
         if(hid[j]) continue;
         var q = pts[j];
         var dx = p.x - q.x, dy = p.y - q.y;
         var d2 = dx*dx + dy*dy;
-        if(d2 < 19600){
+        if(d2 < LINK){
           ctx.beginPath();
           ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = 'rgba(10,10,10,' + (0.09 * (1 - d2/19600)).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(10,10,10,' + (LINE_A * (1 - d2/LINK)).toFixed(3) + ')';
           ctx.lineWidth = 1;
           ctx.stroke();
         }
