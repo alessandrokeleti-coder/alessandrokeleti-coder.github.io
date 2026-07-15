@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basile Intelligence Group — AI consulting for every business</title>
+<meta name="description" content="You know AI could change your business. We know how. Basile Intelligence Group finds where AI fits your business, builds it, and proves it pays. Free consultation.">
+<meta property="og:title" content="Basile Intelligence Group — AI consulting for every business">
+<meta property="og:description" content="From family shops to law firms — we find where AI fits your business, build it, and prove it pays.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' fill='%23000' text-anchor='middle'%3EB%3C/text%3E%3Ccircle cx='25' cy='25' r='3' fill='%231C7FB5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF; --ink:#0A0A0A; --line:#E8E7E2; --line2:#D8D6CF;
+  --grey:#5F5E5A; --grey-dim:#8A8880; --grey-faint:#B4B2A9;
+  --blue:#1C7FB5; --blue-soft:#9CC6DE;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',-apple-system,sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;font-weight:400;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+::selection{background:var(--blue);color:#FFFFFF;}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,64px);}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.3em;color:var(--blue);text-transform:uppercase;}
+.sec-num{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--blue);letter-spacing:0.1em;}
+
+/* ---------- preloader ---------- */
+#loader{position:fixed;inset:0;background:var(--paper);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s;}
+#loader.done{opacity:0;visibility:hidden;}
+#loader span{font-family:'Space Grotesk',sans-serif;letter-spacing:0.3em;font-size:14px;color:var(--ink);opacity:0;animation:loaderIn 1.2s ease forwards;}
+@keyframes loaderIn{0%{opacity:0;transform:translateY(12px);}100%{opacity:1;transform:translateY(0);}}
+
+/* ---------- geometry canvas (site-wide) ---------- */
+#stars{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
+nav,header,section,footer,.marquee,#mobileMenu,#loader{position:relative;z-index:1;}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background 0.4s ease,border-color 0.4s ease;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border-color:var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,5vw,64px);}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.24em;white-space:nowrap;}
+.logo b{color:var(--blue);font-weight:400;}
+.nav-links{display:flex;gap:34px;align-items:center;}
+.nav-links a{font-size:13px;color:var(--grey);letter-spacing:0.04em;transition:color 0.3s;}
+.nav-links a:hover{color:var(--ink);}
+.btn{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:13.5px;letter-spacing:0.04em;padding:12px 26px;border-radius:999px;transition:transform 0.4s var(--ease),background 0.3s,color 0.3s,border-color 0.3s;cursor:pointer;border:none;}
+.btn:hover{transform:translateY(-2px);}
+.btn-black{background:var(--ink);color:#FFFFFF;}
+.btn-black:hover{background:var(--blue);color:#FFFFFF;}
+.btn-blue{background:var(--blue);color:#FFFFFF;}
+.btn-blue:hover{background:var(--ink);color:#FFFFFF;}
+.btn-ghost{border:1px solid var(--line2);color:var(--ink);background:transparent;}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+.nav-cta{padding:10px 20px;font-size:12.5px;}
+#burger{display:none;background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;}
+
+/* mobile menu */
+#mobileMenu{position:fixed;inset:0;background:var(--paper);z-index:150;display:flex;flex-direction:column;justify-content:center;padding:0 32px;gap:8px;opacity:0;visibility:hidden;transition:opacity 0.5s ease,visibility 0.5s;}
+#mobileMenu.open{opacity:1;visibility:visible;}
+#mobileMenu a{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,8vw,40px);padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink);}
+#mobileMenu a:last-of-type{border:none;}
+#closeMenu{position:absolute;top:22px;right:26px;background:none;border:none;color:var(--ink);font-size:30px;cursor:pointer;}
+
+/* ---------- hero ---------- */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;}
+.hero-content{padding-top:80px;}
+.hero-content .eyebrow{display:block;margin-bottom:26px;opacity:0;}
+.mask{overflow:hidden;}
+.mask span{display:block;transform:translateY(110%);}
+h1{font-size:clamp(44px,8.5vw,104px);line-height:1.04;letter-spacing:-0.015em;font-weight:400;}
+h1 .dim{color:var(--grey-faint);}
+.hero-sub{max-width:480px;font-size:clamp(15px,1.6vw,17px);color:var(--grey);margin:32px 0 40px;opacity:0;}
+.hero-ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap;opacity:0;}
+.link-arrow{font-family:'Space Grotesk',sans-serif;font-size:14px;color:var(--blue);letter-spacing:0.04em;transition:letter-spacing 0.3s;}
+.link-arrow:hover{letter-spacing:0.1em;}
+.scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s ease 2.4s forwards;}
+.scroll-cue .line{width:1px;height:44px;background:var(--line2);position:relative;overflow:hidden;}
+.scroll-cue .line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--blue);animation:scrollLine 2s ease infinite;}
+.scroll-cue small{font-size:10px;letter-spacing:0.3em;color:var(--grey-faint);}
+@keyframes scrollLine{0%{top:-100%;}60%{top:100%;}100%{top:100%;}}
+@keyframes fadeIn{to{opacity:1;}}
+
+body.loaded .hero-content .eyebrow{animation:fadeUp 1s var(--ease) 0.9s forwards;}
+body.loaded .mask.m1 span{animation:rise 1.1s var(--ease) 1.05s forwards;}
+body.loaded .mask.m2 span{animation:rise 1.1s var(--ease) 1.2s forwards;}
+body.loaded .mask.m3 span{animation:rise 1.1s var(--ease) 1.35s forwards;}
+body.loaded .hero-sub{animation:fadeUp 1s var(--ease) 1.9s forwards;}
+body.loaded .hero-ctas{animation:fadeUp 1s var(--ease) 2.15s forwards;}
+@keyframes rise{to{transform:translateY(0);}}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
+
+/* ---------- marquee ---------- */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;white-space:nowrap;background:rgba(255,255,255,0.6);}
+.marquee-track{display:inline-block;animation:glide 30s linear infinite;}
+.marquee-track span{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:0.26em;color:var(--grey-faint);}
+.marquee-track b{color:var(--blue);font-weight:400;}
+@keyframes glide{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ---------- sections ---------- */
+section{padding:clamp(80px,12vw,150px) 0;}
+.sec-head{display:flex;gap:clamp(20px,4vw,60px);align-items:baseline;margin-bottom:clamp(36px,6vw,70px);}
+h2{font-size:clamp(32px,4.6vw,58px);line-height:1.12;letter-spacing:-0.01em;max-width:640px;}
+.sec-intro{max-width:520px;color:var(--grey);margin-top:22px;font-size:16px;}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 1s var(--ease),transform 1s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal.d1{transition-delay:0.1s;}.reveal.d2{transition-delay:0.2s;}.reveal.d3{transition-delay:0.3s;}
+.reveal.d4{transition-delay:0.4s;}.reveal.d5{transition-delay:0.5s;}
+
+/* what we do cards */
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.cap{border:1px solid var(--line);padding:30px 26px;border-radius:4px;transition:border-color 0.4s,transform 0.5s var(--ease),background 0.4s;background:rgba(255,255,255,0.82);}
+.cap:hover{border-color:var(--blue-soft);transform:translateY(-6px);background:#FFFFFF;box-shadow:0 24px 50px -30px rgba(10,40,60,0.18);}
+.cap .num{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--grey-faint);letter-spacing:0.1em;display:block;margin-bottom:22px;}
+.cap h3{font-size:19px;margin-bottom:10px;}
+.cap p{font-size:14px;color:var(--grey);line-height:1.65;}
+.cap.accent{border-color:var(--blue-soft);}
+.cap.accent .num,.cap.accent h3 span{color:var(--blue);}
+
+/* full bleed break */
+.break{position:relative;height:clamp(360px,60vh,560px);overflow:hidden;padding:0;}
+.break img{width:100%;height:120%;object-fit:cover;filter:grayscale(35%) brightness(0.5) contrast(1.05);position:absolute;top:-10%;left:0;}
+.break::after{content:'';position:absolute;inset:0;background:rgba(3,8,14,0.35);}
+.break .wrap{position:relative;z-index:2;height:100%;display:flex;align-items:center;}
+.break p{font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3.6vw,42px);line-height:1.25;max-width:720px;letter-spacing:-0.01em;color:#FFFFFF;}
+.break p b{color:#7CC0E8;font-weight:400;}
+
+/* industries */
+.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.ind{position:relative;border-radius:4px;overflow:hidden;height:280px;border:1px solid var(--line);}
+.ind img{width:100%;height:100%;object-fit:cover;filter:grayscale(45%) brightness(0.5) contrast(1.05);transition:transform 1.2s var(--ease),filter 0.6s;}
+.ind:hover img{transform:scale(1.06);filter:grayscale(10%) brightness(0.6) contrast(1.05);}
+.ind .tag{position:absolute;left:22px;bottom:44px;font-family:'Space Grotesk',sans-serif;font-size:20px;z-index:2;color:#FFFFFF;}
+.ind .sub{position:absolute;left:22px;bottom:20px;font-size:12.5px;color:#C9CFCF;z-index:2;}
+.ind.cta-tile{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:26px;border:1px solid var(--blue-soft);background:rgba(240,248,252,0.85);}
+.ind.cta-tile h3{font-size:22px;margin-bottom:8px;color:var(--ink);}
+.ind.cta-tile h3 b{color:var(--blue);font-weight:400;}
+.ind.cta-tile p{font-size:13.5px;color:var(--grey);margin-bottom:18px;}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.step{border-top:1px solid var(--line2);padding-top:26px;position:relative;}
+.step .big{font-family:'Space Grotesk',sans-serif;font-size:clamp(40px,5vw,64px);color:var(--line2);line-height:1;display:block;margin-bottom:18px;transition:color 0.5s;}
+.step:hover .big{color:var(--blue);}
+.step h3{font-size:20px;margin-bottom:10px;}
+.step p{font-size:14.5px;color:var(--grey);}
+.after-steps{margin-top:44px;font-size:14px;color:var(--grey-dim);max-width:560px;}
+
+/* guarantee */
+#why{background:rgba(250,250,248,0.8);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.grid-2{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(30px,6vw,90px);align-items:start;}
+.pillars{display:flex;flex-direction:column;gap:0;}
+.pillar{border-top:1px solid var(--line);padding:22px 0;display:flex;gap:22px;align-items:baseline;}
+.pillar:last-child{border-bottom:1px solid var(--line);}
+.pillar .k{font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,2.6vw,34px);color:var(--blue);min-width:110px;}
+.pillar div h3{font-size:16px;margin-bottom:4px;}
+.pillar div p{font-size:13.5px;color:var(--grey);}
+
+/* calculator */
+#calc .panel{border:1px solid var(--line);border-radius:6px;padding:clamp(26px,4vw,46px);background:rgba(250,250,248,0.88);}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center;}
+.field{margin-bottom:30px;}
+.field label{display:flex;justify-content:space-between;font-size:13.5px;color:var(--grey);margin-bottom:12px;letter-spacing:0.02em;}
+.field label output{color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:15px;}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:var(--line2);border-radius:2px;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--blue);cursor:pointer;transition:transform 0.2s;}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25);}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--blue);cursor:pointer;border:none;}
+.calc-out .lab{font-size:12px;letter-spacing:0.24em;color:var(--grey-dim);text-transform:uppercase;margin-bottom:10px;}
+.calc-out .money{font-family:'Space Grotesk',sans-serif;font-size:clamp(46px,6vw,76px);line-height:1;color:var(--ink);letter-spacing:-0.02em;}
+.calc-out .money em{font-style:normal;color:var(--blue);}
+.calc-out .per{font-size:14px;color:var(--grey-dim);margin:8px 0 26px;}
+.calc-note{font-size:12.5px;color:var(--grey-faint);margin-top:26px;max-width:420px;}
+
+/* contact */
+#contact{text-align:center;padding-bottom:clamp(60px,8vw,110px);}
+#contact h2{max-width:none;font-size:clamp(52px,9vw,120px);}
+#contact h2 b{color:var(--blue);font-weight:400;}
+#contact .sub{color:var(--grey);margin:24px auto 40px;max-width:440px;}
+.contact-meta{display:flex;gap:34px;justify-content:center;margin-top:46px;flex-wrap:wrap;}
+.contact-meta a,.contact-meta span{font-size:13.5px;color:var(--grey-dim);letter-spacing:0.04em;transition:color 0.3s;}
+.contact-meta a:hover{color:var(--blue);}
+
+footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,255,0.6);}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.foot span{font-size:11px;letter-spacing:0.14em;color:var(--grey-faint);text-transform:uppercase;}
+
+@media(max-width:900px){
+  .nav-links{display:none;}
+  #burger{display:block;}
+  .cap-grid,.ind-grid,.steps{grid-template-columns:1fr 1fr;}
+  .grid-2,.calc-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .cap-grid,.ind-grid,.steps{grid-template-columns:1fr;}
+  .ind{height:220px;}
+  .hero-ctas .btn{width:100%;text-align:center;}
+  .hero-ctas{gap:12px;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
+  .mask span{transform:none;}
+  .hero-content .eyebrow,.hero-sub,.hero-ctas,.reveal{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="loader"><span>BASILE <b style="color:#1C7FB5;font-weight:400;">INTELLIGENCE</b> GROUP</span></div>
+
+<canvas id="stars"></canvas>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#hero">BASILE <b>INTELLIGENCE</b> GROUP</a>
+    <div class="nav-links">
+      <a href="#what">What we do</a>
+      <a href="#who">Who we help</a>
+      <a href="#how">How it works</a>
+      <a href="#why">Why us</a>
+      <a class="btn btn-ghost nav-cta" href="https://calendly.com/alessandrokeleti/ai-strategy-session" target="_blank" rel="noopener">Free consultation</a>
+    </div>
+    <button id="burger" aria-label="Open menu">≡</button>
+  </div>
+</nav>
+
+<div id="mobileMenu">
+  <button id="closeMenu" aria-label="Close menu">×</button>
+  <a href="#what">What we do</a>
+  <a href="#who">Who we help</a>
+  <a href="#how">How it works</a>
+  <a href="#why">Why us</a>
+  <a href="https://calendly.com/alessandrokeleti/ai-strategy-session" target="_blank" rel="noopener" style="color:#1C7FB5;">Free consultation →</a>
+</div>
+
+<header id="hero">
+  <div class="wrap hero-content">
+    <span class="eyebrow">AI consulting — for every business</span>
+    <h1>
+      <div class="mask m1"><span>Bring AI into</span></div>
+      <div class="mask m2"><span>your business.</span></div>
+      <div class="mask m3"><span class="dim">Without the guesswork.</span></div>
+    </h1>
+    <p class="hero-sub">You know AI could change how you work — you just don't know where to start. We do. From family shops to law firms, we find where AI fits your business, build it, and prove it pays.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-black" href="https://calendly.com/alessandrokeleti/ai-strategy-session" target="_blank" rel="noopener">Book a free consultation</a>
+      <a class="link-arrow" href="#what">Explore what's possible →</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><small>SCROLL</small><div class="line"></div></div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>FAMILY BUSINESSES — TRADES — DENTAL — LAW — MED SPA — REAL ESTATE — HOSPITALITY — RETAIL — <b>YOUR BUSINESS</b> — </span><span>FAMILY BUSINESSES — TRADES — DENTAL — LAW — MED SPA — REAL ESTATE — HOSPITALITY — RETAIL — <b>YOUR BUSINESS</b> — </span>
+  </div>
+</div>
+
+<section id="what">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">01</span>
+      <div>
+        <h2>If AI can do it,<br>we integrate it.</h2>
+        <p class="sec-intro">No packages. No one-size-fits-all. We look at how your business actually runs, find the hours and dollars leaking out, and build AI around the way you already work.</p>
+      </div>
+    </div>
+    <div class="cap-grid">
+      <div class="cap reveal"><span class="num">/ 01</span><h3>Reception &amp; scheduling</h3><p>Calls answered, questions handled, appointments booked — 24 hours a day, in a voice your customers trust.</p></div>
+      <div class="cap reveal d1"><span class="num">/ 02</span><h3>Documents &amp; paperwork</h3><p>Quotes, invoices, contracts, intake forms, reports — drafted in seconds instead of evenings.</p></div>
+      <div class="cap reveal d2"><span class="num">/ 03</span><h3>Follow-up &amp; sales</h3><p>Every lead chased, every estimate followed up, every review requested. Nothing slips through again.</p></div>
+      <div class="cap reveal"><span class="num">/ 04</span><h3>Back office</h3><p>Inbox triage, bookkeeping prep, scheduling, reporting — the invisible work that eats your week, automated.</p></div>
+      <div class="cap reveal d1"><span class="num">/ 05</span><h3>Your team, trained</h3><p>Hands-on training so your people use AI confidently and safely — with clear rules for what it should never touch.</p></div>
+      <div class="cap accent reveal d2"><span class="num">/ 06</span><h3><span>Something we haven't listed?</span></h3><p>If it happens on a phone, a screen, or a piece of paper, we can probably automate it. Ask us.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="break">
+  <img id="parallaxImg" src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=2000&q=70" alt="Night sky full of stars" onerror="this.style.display='none'">
+  <div class="wrap"><p class="reveal">Technology this powerful used to be reserved for the Fortune 500. <b>We exist to change that.</b></p></div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">02</span>
+      <div>
+        <h2>Any business.<br>Any size. Any industry.</h2>
+        <p class="sec-intro">We're not a "dental AI company" or a "contractor AI company." We're the firm that figures out what AI should do for <em>your</em> business — then makes it happen.</p>
+      </div>
+    </div>
+    <div class="ind-grid">
+      <div class="ind reveal"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=70" alt="Tradespeople at work" onerror="this.style.display='none'"><span class="tag">Trades</span><span class="sub">HVAC · plumbing · electrical · roofing</span></div>
+      <div class="ind reveal d1"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=70" alt="Modern dental clinic" onerror="this.style.display='none'"><span class="tag">Dental &amp; med spa</span><span class="sub">Practices · clinics · aesthetics</span></div>
+      <div class="ind reveal d2"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=70" alt="Professional office" onerror="this.style.display='none'"><span class="tag">Law firms</span><span class="sub">Intake · drafting · safe AI policy</span></div>
+      <div class="ind reveal"><img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=900&q=70" alt="Small business owner at the counter" onerror="this.style.display='none'"><span class="tag">Family businesses</span><span class="sub">Shops · restaurants · services</span></div>
+      <div class="ind reveal d1"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=70" alt="Real estate" onerror="this.style.display='none'"><span class="tag">Real estate</span><span class="sub">Agents · brokers · property managers</span></div>
+      <div class="ind cta-tile reveal d2">
+        <h3>+ <b>your business</b></h3>
+        <p>Don't see your industry? That's the point — there isn't one we can't work with.</p>
+        <a class="link-arrow" href="https://calendly.com/alessandrokeleti/ai-strategy-session" target="_blank" rel="noopener">Tell us what you do →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">03</span>
+      <div>
+        <h2>Three steps.<br>Zero jargon.</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="big">01</span><h3>Free consultation</h3><p>Thirty minutes. We learn how your business runs; you learn what AI can actually do for it. No cost, no obligation, no tech-speak.</p></div>
+      <div class="step reveal d1"><span class="big">02</span><h3>We build it</h3><p>You get a plan with a fixed price in writing — then working AI in weeks, not months. We handle every technical detail.</p></div>
+      <div class="step reveal d2"><span class="big">03</span><h3>It pays for itself</h3><p>We measure results in dollars and hours — not dashboards. You see exactly what it's earning you, every month.</p></div>
+    </div>
+    <p class="after-steps reveal">Afterwards, keep us on to run and improve everything — or take the keys and run it yourself. Your call.</p>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="grid-2">
+      <div class="reveal">
+        <span class="sec-num">04</span>
+        <h2 style="margin-top:14px;">The risk<br>sits with us.</h2>
+        <p class="sec-intro">Most consultants sell hours and hope. We put a success metric in writing on every build — and if we miss it, we keep working at no charge until it's hit. Your name shouldn't be on the line for trying something new. Ours is.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar reveal"><span class="k">$0</span><div><h3>The first conversation is free</h3><p>And genuinely useful — you'll leave knowing what's possible even if we never work together.</p></div></div>
+        <div class="pillar reveal d1"><span class="k">Fixed</span><div><h3>Prices in writing, before we start</h3><p>No hourly meters, no surprise invoices. You know the number before you say yes.</p></div></div>
+        <div class="pillar reveal d2"><span class="k">Weeks</span><div><h3>From yes to live</h3><p>Working systems in weeks, not year-long "transformation programs."</p></div></div>
+        <div class="pillar reveal d3"><span class="k">Yours</span><div><h3>You own what we build</h3><p>Accounts, systems, and data stay in your name. No hostage-taking, ever.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">05</span>
+      <div>
+        <h2>What is doing nothing costing you?</h2>
+        <p class="sec-intro">Every missed call, unanswered message, and forgotten follow-up is revenue walking to a competitor. Move the sliders — the math is sobering.</p>
+      </div>
+    </div>
+    <div class="panel reveal">
+      <div class="calc-grid">
+        <div>
+          <div class="field">
+            <label>Missed calls or inquiries per week <output id="oCalls">15</output></label>
+            <input type="range" id="rCalls" min="1" max="60" step="1" value="15">
+          </div>
+          <div class="field">
+            <label>Average value of a new customer <output id="oValue">$400</output></label>
+            <input type="range" id="rValue" min="50" max="5000" step="50" value="400">
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label>How many would have booked <output id="oClose">30%</output></label>
+            <input type="range" id="rClose" min="5" max="80" step="5" value="30">
+          </div>
+        </div>
+        <div class="calc-out">
+          <p class="lab">Estimated revenue lost per year</p>
+          <p class="money"><em>$</em><span id="oYear">93,600</span></p>
+          <p class="per"><span id="oMonth">$7,800</span> every month</p>
+          <a class="btn btn-blue" href="https://calendly.com/alessandrokeleti/ai-strategy-session" target="_blank" rel="noopener">Stop the leak — free consultation</a>
+          <p class="calc-note">Industry estimate for illustration — on a real engagement we measure your actual numbers before we promise anything.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Let's talk<b>.</b></h2>
+      <p class="sub">A 30-minute conversation about your business. No cost, no obligation, no jargon — just an honest look at what AI could do for you.</p>
+      <a class="btn btn-black" style="font-size:15px;padding:16px 36px;" href="https://calendly.com/alessandrokeleti/ai-strategy-session" target="_blank" rel="noopener">Book your free consultation</a>
+      <div class="contact-meta">
+        <a href="mailto:alessandrokeleti@gmail.com">alessandrokeleti@gmail.com</a>
+        <span>Boca Raton, Florida</span>
+        <span>Serving businesses nationwide</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Basile Intelligence Group LLC</span>
+    <span>AI consulting — for every business</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* loader */
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      document.getElementById('loader').classList.add('done');
+      document.body.classList.add('loaded');
+    }, 900);
+  });
+  setTimeout(function(){
+    document.getElementById('loader').classList.add('done');
+    document.body.classList.add('loaded');
+  }, 2600);
+
+  /* nav */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  /* mobile menu */
+  var menu = document.getElementById('mobileMenu');
+  document.getElementById('burger').addEventListener('click', function(){ menu.classList.add('open'); });
+  document.getElementById('closeMenu').addEventListener('click', function(){ menu.classList.remove('open'); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); }); });
+
+  /* scroll reveals */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.15, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* parallax on break image */
+  var pImg = document.getElementById('parallaxImg');
+  if(pImg){
+    window.addEventListener('scroll', function(){
+      var r = pImg.parentElement.getBoundingClientRect();
+      if(r.bottom > 0 && r.top < window.innerHeight){
+        var p = (r.top + r.height/2 - window.innerHeight/2) / window.innerHeight;
+        pImg.style.transform = 'translateY(' + (p * 60).toFixed(1) + 'px)';
+      }
+    }, {passive:true});
+  }
+
+  /* geometry canvas — black dots and lines on white */
+  var canvas = document.getElementById('stars');
+  var ctx = canvas.getContext('2d');
+  var pts = [], W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function sizeCanvas(){
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    var count = Math.min(Math.floor(W * H / 11000), 170);
+    pts = [];
+    for(var i = 0; i < count; i++){
+      pts.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        r: Math.random() * 1.4 + 0.5
+      });
+    }
+  }
+  sizeCanvas();
+  window.addEventListener('resize', sizeCanvas);
+
+  var mouse = {x: -9999, y: -9999};
+  window.addEventListener('mousemove', function(e){
+    mouse.x = e.clientX; mouse.y = e.clientY;
+  }, {passive:true});
+
+  /* content exclusion zones — geometry lives only in the empty space between items */
+  var PAD = 26, zoneEls = [], zones = [];
+  function collectZones(){
+    zoneEls = Array.prototype.slice.call(document.querySelectorAll(
+      '.nav-inner, .hero-content, .scroll-cue, .sec-head, .cap, .ind, .panel, .step, .pillar, .after-steps, .grid-2, #contact .reveal, .break, .marquee, .foot'
+    ));
+  }
+  collectZones();
+  function refreshZones(){
+    zones.length = 0;
+    for(var i = 0; i < zoneEls.length; i++){
+      var r = zoneEls[i].getBoundingClientRect();
+      if(r.width === 0 || r.bottom < -PAD || r.top > H + PAD) continue;
+      zones.push({l: r.left - PAD, t: r.top - PAD, r: r.right + PAD, b: r.bottom + PAD});
+    }
+  }
+  function inZone(x, y){
+    for(var i = 0; i < zones.length; i++){
+      var z = zones[i];
+      if(x > z.l && x < z.r && y > z.t && y < z.b) return true;
+    }
+    return false;
+  }
+
+  var hid = [];
+  function tick(){
+    ctx.clearRect(0, 0, W, H);
+    refreshZones();
+    var mouseHidden = inZone(mouse.x, mouse.y);
+    for(var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0 || p.x > W) p.vx *= -1;
+      if(p.y < 0 || p.y > H) p.vy *= -1;
+      hid[i] = inZone(p.x, p.y);
+    }
+    for(var i = 0; i < pts.length; i++){
+      if(hid[i]) continue;
+      var p = pts[i];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+      ctx.fillStyle = 'rgba(10,10,10,0.42)';
+      ctx.fill();
+      for(var j = i + 1; j < pts.length; j++){
+        if(hid[j]) continue;
+        var q = pts[j];
+        var dx = p.x - q.x, dy = p.y - q.y;
+        var d2 = dx*dx + dy*dy;
+        if(d2 < 19600){
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = 'rgba(10,10,10,' + (0.09 * (1 - d2/19600)).toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+      if(!mouseHidden){
+        var mdx = p.x - mouse.x, mdy = p.y - mouse.y;
+        var md2 = mdx*mdx + mdy*mdy;
+        if(md2 < 25600){
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = 'rgba(28,127,181,' + (0.3 * (1 - md2/25600)).toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    if(!reduced) requestAnimationFrame(tick);
+  }
+  tick();
+
+  /* calculator */
+  var rCalls = document.getElementById('rCalls'),
+      rValue = document.getElementById('rValue'),
+      rClose = document.getElementById('rClose');
+  function fmt(n){ return n.toLocaleString('en-US'); }
+  function calc(){
+    var calls = +rCalls.value, val = +rValue.value, close = +rClose.value;
+    document.getElementById('oCalls').textContent = calls;
+    document.getElementById('oValue').textContent = '$' + fmt(val);
+    document.getElementById('oClose').textContent = close + '%';
+    var yearly = Math.round(calls * 52 * val * (close/100));
+    var monthly = Math.round(yearly / 12);
+    document.getElementById('oYear').textContent = fmt(yearly);
+    document.getElementById('oMonth').textContent = '$' + fmt(monthly);
+  }
+  [rCalls, rValue, rClose].forEach(function(r){ r.addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
